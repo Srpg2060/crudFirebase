@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <label for="exampleInputEmail1">nombre</label>
+      <input type="text" class="form-control" id="STname" name="STname" [(ngModel)]="STname">
+    </div>
+    <div class="col-md-3">
+      <label for="exampleInputPassword1">edad</label>
+      <input type="text" class="form-control" id="STage" name="STage" [(ngModel)]="STage">
+    </div>
+    <div class="col-md-3">
+      <label for="exampleInputPassword1">direccion</label>
+      <input type="text" class="form-control" id="STaddress" name="STaddress" [(ngModel)]="STaddress">
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary" (click)="CreateRecord()">Crear</button>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card" *ngFor="let item of students">
+        <div class="card-body" *ngIf="!item.isEdit; else elseBlock">
+          <h5 class="card-title">{{item.Name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Edad: {{item.Age}} años</h6>
+          <p class="card-text"> Direccion: {{item.Address}}</p>
+          <a href="#" class="card-link" (click)="EditRecord(item.id,item)">editar</a>
+          <a href="#" class="card-link" (click)="RemoveRecord(item.id)">borrar</a>
+        </div>
+
+        <ng-template #elseBlock>
+          <div class="card-body">
+            <h5 class="card-title">Editar</h5>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="exampleInputEmail1">Nombre</label>
+                <input type="text" class="form-control" id="example1" [(ngModel)]="Editname">
+              </div>
+              <div class="col-md-12">
+                <label for="exampleInputPassword1">Edad</label>
+                <input type="text" class="form-control" id="example2" [(ngModel)]="Editage">
+              </div>
+              <div class="col-md-12">
+                <label for="exampleInputPassword1">Direccion</label>
+                <input type="text" class="form-control" id="example3" [(ngModel)]="Editaddress">
+              </div>
+            </div>
+            <a href="#" class="card-link" (click)="item.isEdit=false">cancelar</a>
+            <a href="#" class="card-link" (click)="UpdateRecord()">Actualizar</a>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<router-outlet></router-outlet>
